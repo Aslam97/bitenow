@@ -32,6 +32,7 @@ export default function BusinessCard({
                 width={0}
                 height={0}
                 sizes="100vw"
+                priority
                 style={{ width: '100%', height: '100%' }}
               />
             </div>
