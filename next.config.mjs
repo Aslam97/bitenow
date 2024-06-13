@@ -4,7 +4,7 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: '62teknologi-backend-test-aslam-hafizuddin.test'
+        hostname: process.env.NEXT_PUBLIC_API_URL
       },
       {
         hostname: 'via.placeholder.com'
@@ -12,5 +12,4 @@ const nextConfig = {
     ]
   }
 }
-
 export default nextConfig
