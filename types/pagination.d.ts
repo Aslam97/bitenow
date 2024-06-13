@@ -29,3 +29,8 @@ interface JsonResourceWithPagination<T> {
   links: PaginationLinks
   meta: PaginationMeta
 }
+
+interface PaginationState {
+  page: number
+  paginate: number
+}
