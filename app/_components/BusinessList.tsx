@@ -32,9 +32,12 @@ export default function BusinessList({
         path: 'businesses',
         params: {
           ...params,
-          pagination
+          ...pagination
         },
         config: {
+          headers: {
+            Accept: 'application/json'
+          },
           cache: 'no-cache'
         }
       })

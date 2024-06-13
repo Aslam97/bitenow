@@ -5,26 +5,23 @@ import CuisineSkeleton from './_components/CuisineSkeleton'
 import Businesses from './_components/Businesses'
 import BusinessSkeleton from './_components/BusinessSkeleton'
 import BusinesFilter from './_components/filter'
-import type { FilterState } from '@/lib/providers/param-wrapper'
 
 export default async function Home({
   searchParams
 }: {
-  searchParams: FilterState
+  searchParams: Record<string, string>
 }) {
   const filter = Object.keys(searchParams).reduce((acc, key) => {
-    if (['sort_by', 'page', 'paginate', 'include'].includes(key)) return acc
+    if (['sort_by', 'include'].includes(key)) return acc
 
     if (!key || !searchParams[key]) return acc
     acc[key] = searchParams[key]
     return acc
   }, {} as FilterState)
 
-  const sort_by = searchParams.sort_by || '-distance'
-  const pagination = {
-    page: parseInt((searchParams.page as string) || '1'),
-    paginate: parseInt((searchParams.paginate as string) || '20')
-  }
+  const sort_by = searchParams.sort_by || 'distance'
+  const page = parseInt((searchParams.page as string) || '1')
+  const paginate = parseInt((searchParams.paginate as string) || '20')
   const include = searchParams.include || 'cuisines'
 
   return (
@@ -46,8 +43,11 @@ export default async function Home({
           params={{
             filter,
             sort_by,
-            pagination,
-            include
+            page,
+            paginate,
+            include,
+            latitude: 0,
+            longitude: 0
           }}
         />
       </Suspense>

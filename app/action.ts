@@ -1,16 +1,10 @@
 'use server'
 
-import { FilterState } from '@/lib/providers/param-wrapper'
 import QueryString from 'qs'
 
 interface fetchProps {
   path: string
-  params: {
-    sort_by?: string
-    include?: string
-    filter?: FilterState
-    pagination?: PaginationState
-  }
+  params?: ParamState
   config?: RequestInit
 }
 
@@ -19,18 +13,14 @@ export async function fetchApi<T>({
   params,
   config
 }: fetchProps): Promise<T> {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/${path}`
+  const query = QueryString.stringify(params, {
+    encodeValuesOnly: true, // prettify URL
+    skipNulls: true
+  })
 
-  const { pagination, ...rest } = params
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/${path}?${query}`
 
-  const query = QueryString.stringify(
-    { ...rest, ...pagination },
-    {
-      encodeValuesOnly: true // prettify URL
-    }
-  )
-
-  const response = await fetch(`${url}?${query}`, config)
+  const response = await fetch(url, config)
   const data = await response.json()
 
   return data

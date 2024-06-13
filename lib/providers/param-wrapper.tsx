@@ -1,24 +1,16 @@
 'use client'
 
+import { useGeolocation } from '@uidotdev/usehooks'
 import { useSearchParams } from 'next/navigation'
 import { createContext } from 'react'
 
-export interface FilterState {
-  [key: string]: any
-}
-
-export const ParamContext = createContext<{
-  filter: FilterState
-  sort_by: string
-  pagination: PaginationState
-  include: string
-}>({
+export const ParamContext = createContext<ParamState>({
   filter: {},
-  sort_by: '-distance',
-  pagination: {
-    page: 1,
-    paginate: 20
-  },
+  sort_by: 'distance',
+  page: 1,
+  paginate: 20,
+  latitude: 0,
+  longitude: 0,
   include: 'cuisines'
 })
 
@@ -27,14 +19,16 @@ export default function ParamWrapper({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const state = useGeolocation()
   const searchParams = useSearchParams()
 
   const filter: FilterState = {}
 
   searchParams.forEach((value, key) => {
-    if (['sort_by', 'page', 'paginate', 'include'].includes(key)) return
+    if (['sort_by', 'include'].includes(key)) return
 
     if (!key || !value) return
+
     filter[key] = value
   })
 
@@ -42,11 +36,11 @@ export default function ParamWrapper({
     <ParamContext.Provider
       value={{
         filter,
-        sort_by: searchParams.get('sort_by') || '-distance',
-        pagination: {
-          page: parseInt(searchParams.get('page') || '1'),
-          paginate: parseInt(searchParams.get('paginate') || '20')
-        },
+        sort_by: searchParams.get('sort_by') || 'distance',
+        page: parseInt(searchParams.get('page') || '1'),
+        paginate: parseInt(searchParams.get('paginate') || '20'),
+        latitude: state.latitude || 0,
+        longitude: state.longitude || 0,
         include: searchParams.get('include') || 'cuisines'
       }}
     >

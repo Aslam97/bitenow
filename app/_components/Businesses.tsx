@@ -1,23 +1,16 @@
 import BusinessList from './BusinessList'
 import { fetchApi } from '../action'
-import type { FilterState } from '@/lib/providers/param-wrapper'
 
-export default async function Businesses({
-  params
-}: {
-  params: {
-    filter: FilterState
-    sort_by: string
-    pagination: PaginationState
-    include: string
-  }
-}) {
+export default async function Businesses({ params }: { params: ParamState }) {
   const { data: businesses, meta } = await fetchApi<
     JsonResourceWithPagination<BusinessModel>
   >({
     path: 'businesses',
     params,
     config: {
+      headers: {
+        Accept: 'application/json'
+      },
       cache: 'no-cache'
     }
   })
