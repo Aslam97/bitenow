@@ -1,8 +1,7 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { LocateFixedIcon, NavigationIcon, SearchIcon } from 'lucide-react'
+import { SearchIcon } from 'lucide-react'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 import { useDebouncedCallback } from 'use-debounce'
 
@@ -12,46 +11,34 @@ export default function Search({ placeholder }: { placeholder: string }) {
   const { replace } = useRouter()
 
   const handleSearch = useDebouncedCallback((term) => {
-    console.log(`Searching... ${term}`)
-
     const params = new URLSearchParams(searchParams)
     if (term) {
-      params.set('query', term)
+      params.set('term', term)
     } else {
-      params.delete('query')
+      params.delete('term')
     }
+
     replace(`${pathname}?${params.toString()}`)
   }, 300)
 
   return (
     <div className="flex">
-      <div className="flex-grow">
-        <label htmlFor="search-field" className="sr-only">
-          Search
-        </label>
-        <div className="relative w-full">
-          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-            <SearchIcon className="size-5" />
-          </div>
-
-          <Input
-            id="search-field"
-            name="search"
-            placeholder={placeholder}
-            onChange={(e) => handleSearch(e.target.value)}
-            defaultValue={searchParams.get('query')?.toString()}
-            className="h-11 rounded-full border-0 bg-zinc-100 pl-12 focus-visible:ring-0 focus-visible:ring-transparent"
-          />
+      <label htmlFor="search-field" className="sr-only">
+        Search
+      </label>
+      <div className="relative w-full">
+        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+          <SearchIcon className="size-5" />
         </div>
-      </div>
-      <div className="ml-3">
-        <Button
-          size="icon"
-          variant="secondary"
-          className="rounded-full text-green-500"
-        >
-          <LocateFixedIcon />
-        </Button>
+
+        <Input
+          id="search-field"
+          name="search"
+          placeholder={placeholder}
+          onChange={(e) => handleSearch(e.target.value)}
+          defaultValue={searchParams.get('term')?.toString()}
+          className="h-11 rounded-full border-0 bg-zinc-100 pl-12 focus-visible:ring-0 focus-visible:ring-transparent"
+        />
       </div>
     </div>
   )
