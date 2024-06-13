@@ -13,7 +13,7 @@ export default function CuisineList({
   )
 
   const activeIndex = cuisines.findIndex(
-    (cuisine) => cuisine.slug === searchParams.get('cuisine')
+    (cuisine) => cuisine.slug === searchParams.get('cuisines')
   )
 
   useEffect(() => {
