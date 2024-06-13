@@ -4,7 +4,7 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: process.env.NEXT_PUBLIC_API_URL
+        hostname: new URL(process.env.NEXT_PUBLIC_API_URL).hostname
       },
       {
         hostname: 'via.placeholder.com'
