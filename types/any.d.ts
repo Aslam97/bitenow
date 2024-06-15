@@ -13,8 +13,8 @@ interface ParamState {
   include: string
   filter: FilterState
   sort_by: string
-  latitude: number | null
-  longitude: number | null
+  latitude?: number | null
+  longitude?: number | null
   paginate: number
   page: number
 }

@@ -57,7 +57,7 @@ interface BusinessModel {
     display_address: string
   }
   rating: number
-  review_count: number
+  reviews_count: number
   distance: number
   reviews: BusinessReviewModel[]
   opening_hours: BusinessOpeningHourModel[]
