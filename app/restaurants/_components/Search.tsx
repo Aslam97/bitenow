@@ -37,7 +37,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
           placeholder={placeholder}
           onChange={(e) => handleSearch(e.target.value)}
           defaultValue={searchParams.get('term')?.toString()}
-          className="h-11 rounded-full border-0 bg-zinc-100 pl-12 focus-visible:ring-0 focus-visible:ring-transparent"
+          className="h-10 rounded-full border-0 bg-zinc-100 pl-12 focus-visible:ring-0 focus-visible:ring-transparent"
         />
       </div>
     </div>

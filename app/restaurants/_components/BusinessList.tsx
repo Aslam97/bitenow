@@ -4,19 +4,18 @@ import { Empty } from '@/components/custom/empty'
 import BusinessCard from './BusinessCard'
 import { useContext, useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { fetchApi } from '../action'
 import { ParamContext } from '@/lib/providers/param-wrapper'
+import QueryString from 'qs'
 
 export default function BusinessList({
-  businesses,
-  meta
-}: Readonly<{ businesses: BusinessModel[]; meta: PaginationMeta }>) {
-  const params = useContext(ParamContext)
-  const [data, setData] = useState<BusinessModel[]>(businesses)
-  const [hasMore, setHasMore] = useState(meta.current_page < meta.last_page)
+  nextPage
+}: Readonly<{ nextPage: number | null }>) {
+  const { filter, ...params } = useContext(ParamContext)
+  const [data, setData] = useState<BusinessModel[]>([])
+  const [hasMore, setHasMore] = useState(nextPage !== null)
   const [loading, setLoading] = useState(false)
   const [pagination, setPagination] = useState<PaginationState>({
-    page: meta.current_page + 1,
+    page: nextPage || 1,
     paginate: 20
   })
   const { ref, inView } = useInView()
@@ -25,30 +24,38 @@ export default function BusinessList({
     const fetchMore = async () => {
       setLoading(true)
 
-      const {
-        data: bs,
-        meta: { current_page, last_page }
-      } = await fetchApi<JsonResourceWithPagination<BusinessModel>>({
-        path: 'businesses',
-        params: {
+      const query = QueryString.stringify(
+        {
+          ...filter,
           ...params,
           ...pagination
         },
-        config: {
+        {
+          encodeValuesOnly: true, // prettify URL
+          skipNulls: true
+        }
+      )
+
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_URL + '/api/businesses' + '?' + query,
+        {
           headers: {
             Accept: 'application/json'
           },
+          credentials: 'include',
           cache: 'no-cache'
         }
-      })
+      )
+      const { data: bs, meta } =
+        (await response.json()) as JsonResourceWithPagination<BusinessModel>
 
       setData((prev) => [...prev, ...bs])
       setPagination((prev) => ({
         ...prev,
-        page: current_page + 1
+        page: meta.current_page + 1
       }))
 
-      if (current_page >= last_page) {
+      if (meta.current_page >= meta.last_page) {
         setHasMore(false)
       }
 
@@ -60,19 +67,15 @@ export default function BusinessList({
     if (inView && hasMore && !loading) {
       fetchMore()
     }
-  }, [hasMore, inView, loading, pagination, params])
+  }, [filter, hasMore, inView, loading, pagination, params])
 
   return (
     <>
-      {data.length > 0 ? (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {data.map((business) => (
-            <BusinessCard key={business.id} business={business} />
-          ))}
-        </div>
-      ) : (
-        <Empty />
-      )}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {data.map((business) => (
+          <BusinessCard key={business.id} business={business} />
+        ))}
+      </div>
 
       <div ref={ref}>
         {hasMore && (

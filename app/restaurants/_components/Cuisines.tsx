@@ -1,4 +1,4 @@
-import { fetchApi } from '../action'
+import { fetchApi } from '../../action'
 import CuisineList from './CuisineList'
 
 export default async function Cuisines() {
