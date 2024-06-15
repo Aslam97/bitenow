@@ -39,8 +39,6 @@ export default function ParamWrapper({
         sort_by: searchParams.get('sort_by') || 'distance',
         page: parseInt(searchParams.get('page') || '1'),
         paginate: parseInt(searchParams.get('paginate') || '20'),
-        latitude: state.latitude || 0,
-        longitude: state.longitude || 0,
         include: searchParams.get('include') || 'cuisines'
       }}
     >
