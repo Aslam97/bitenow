@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const BusinessWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="mt-4 grid grid-cols-1 gap-4 gap-y-6 sm:grid-cols-2 sm:gap-y-8 lg:grid-cols-4">
       {children}
     </div>
   )
@@ -34,7 +34,7 @@ const BusinessCard = ({ business }: { business: BusinessModel }) => {
                 backgroundImage: 'url("/images/icons/icon-preferred.svg")'
               }}
             ></div>
-            <span>Restoran Pilihan</span>
+            <span>Preferred by BiteNow</span>
           </div>
           <p className="mb-1.5 line-clamp-2 text-sm font-semibold md:mb-3 md:text-lg">
             {business.name}
