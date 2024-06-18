@@ -32,21 +32,25 @@ interface BusinessOpeningHourModel {
 }
 
 interface BusinessModel {
-  id: string
+  id: number
   name: string
   slug: string
   image_url: string
   url: string
   phone: string
-  display_phone: string
   price: number
+  coordinates: Coords
+  created_at: string
+  updated_at: string
+  rating: number
+  reviews_count: number
+  distance: number
+  display_phone: string
   price_display: string
   cuisines: BusinessCuisineModel[]
-  transaction: BusinessTransactionModel[]
-  coordinates: {
-    latitude: number
-    longitude: number
-  }
+  reviews: BusinessReviewModel[]
+  opening_hours: BusinessOpeningHourModel[]
+  transactions: BusinessTransactionModel[]
   location: {
     address1: string
     address2: string
@@ -56,10 +60,5 @@ interface BusinessModel {
     state: string
     display_address: string
   }
-  rating: number
-  reviews_count: number
-  distance: number
-  reviews: BusinessReviewModel[]
-  opening_hours: BusinessOpeningHourModel[]
-  is_closed: boolean
+  is_open: boolean
 }
