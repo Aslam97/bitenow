@@ -13,20 +13,24 @@ export default async function Home({
   return (
     <>
       {/* Cuisine */}
-      <Suspense fallback={<CuisineSkeleton />}>
-        <Cuisines />
-      </Suspense>
+      <div className="mt-2">
+        <Suspense fallback={<CuisineSkeleton />}>
+          <Cuisines />
+        </Suspense>
+      </div>
 
       {/* Filter */}
       <BusinesFilter />
 
       {/* Business */}
-      <Suspense
-        fallback={<BusinessSkeleton />}
-        key={JSON.stringify(searchParams)}
-      >
-        <Businesses searchParams={searchParams} />
-      </Suspense>
+      <div className="my-6">
+        <Suspense
+          fallback={<BusinessSkeleton />}
+          key={JSON.stringify(searchParams)}
+        >
+          <Businesses searchParams={searchParams} />
+        </Suspense>
+      </div>
     </>
   )
 }

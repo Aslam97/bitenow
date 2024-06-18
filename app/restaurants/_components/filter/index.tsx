@@ -9,7 +9,7 @@ import {
 
 export default function BusinesFilter() {
   return (
-    <nav className="no-scrollbar overflow-x-auto">
+    <nav className="no-scrollbar mt-6 overflow-x-auto">
       <div
         aria-label="button group"
         data-baseweb="button-group"
