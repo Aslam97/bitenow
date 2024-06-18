@@ -45,8 +45,8 @@ export default function Header() {
           <div className="mr-4 sm:mr-6">
             <Link href="/restaurants">
               <Image
-                src="/aralu.png"
-                alt="Aralu"
+                src="/bitenow.png"
+                alt="BiteNow"
                 width={78}
                 height={24}
                 priority

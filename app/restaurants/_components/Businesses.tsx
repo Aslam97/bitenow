@@ -10,7 +10,7 @@ export default async function Businesses({
   searchParams: Record<string, string>
 }) {
   const cookieStore = cookies()
-  const geo = cookieStore.get('aralu_geo')?.value
+  const geo = cookieStore.get('bitenow_geo')?.value
 
   const { data: businesses, meta } = await fetchApi<
     JsonResourceWithPagination<BusinessModel>

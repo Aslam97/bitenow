@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server'
 export async function middleware(request: NextRequest) {
   const nextResponse = NextResponse.next()
 
-  if (request.cookies.has('aralu_geo')) {
+  if (request.cookies.has('bitenow_geo')) {
     return nextResponse
   }
 
@@ -16,7 +16,7 @@ export async function middleware(request: NextRequest) {
   })
   const { latitude, longitude } = (await res.json()) as Coords
   nextResponse.cookies.set(
-    'aralu_geo',
+    'bitenow_geo',
     JSON.stringify({
       latitude,
       longitude
@@ -26,7 +26,7 @@ export async function middleware(request: NextRequest) {
   // If you are using Vercel, you can easily get the user's location.
   // https://nextjs.org/docs/app/api-reference/functions/next-request#geo
   // nextResponse.cookies.set(
-  //   'aralu_geo',
+  //   'bitenow_geo',
   //   JSON.stringify({
   //     latitude: request.geo?.latitude || 0,
   //     longitude: request.geo?.longitude || 0

@@ -25,6 +25,6 @@ export async function fetchApi<T>({
 }
 
 export async function validateLocation(location: Record<string, any>) {
-  cookies().set('aralu_geo', JSON.stringify(location))
+  cookies().set('bitenow_geo', JSON.stringify(location))
   revalidatePath('/restaurants', 'page')
 }
