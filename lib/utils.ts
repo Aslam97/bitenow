@@ -1,8 +1,6 @@
 import { type ClassValue, clsx } from 'clsx'
 import QueryString from 'qs'
 import { twMerge } from 'tailwind-merge'
-import fs from 'fs'
-import { CityResponse, Reader } from 'maxmind'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -17,15 +15,6 @@ export const calculateTravelDetails = (
   return {
     distanceInKm: distanceInKm,
     travelTimeInMinutes: Math.round(travelTimeInMinutes)
-  }
-}
-
-export const isUrl = (url: string) => {
-  try {
-    new URL(url)
-    return true
-  } catch {
-    return false
   }
 }
 
@@ -58,17 +47,6 @@ export function getIpFromXForwardedFor(ips: string) {
   )
 
   return validIp || null
-}
-
-export function getGeoLocation(ip: string): Coords {
-  const buffer = fs.readFileSync('./db/GeoLite2-City.mmdb')
-  const lookup = new Reader<CityResponse>(buffer)
-  const city = lookup.get(ip)
-
-  return {
-    latitude: city?.location?.latitude || 0,
-    longitude: city?.location?.longitude || 0
-  }
 }
 
 export const parseSearchParams = (searchParams: URLSearchParams) => {
