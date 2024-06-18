@@ -1,6 +1,6 @@
 'use server'
 
-import { isUrl } from '@/lib/utils'
+import { parseSearchParams } from '@/lib/utils'
 import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 
@@ -15,11 +15,8 @@ export async function fetchApi<T>({
   params,
   config
 }: fetchProps): Promise<T> {
-  const query = new URLSearchParams(params).toString()
-
-  const url = isUrl(path)
-    ? path
-    : `${process.env.NEXT_PUBLIC_URL}/api/${path}?${query}`
+  const query = parseSearchParams(new URLSearchParams(params))
+  const url = process.env.NEXT_PUBLIC_API_URL + '/' + path + '?' + query
 
   const response = await fetch(url, config)
   const data = await response.json()
