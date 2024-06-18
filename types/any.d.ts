@@ -18,3 +18,8 @@ interface ParamState {
   paginate: number
   page: number
 }
+
+interface Coords {
+  latitude: number
+  longitude: number
+}
