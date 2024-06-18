@@ -47,7 +47,7 @@ export default function Header() {
               <Image
                 src="/bitenow.png"
                 alt="BiteNow"
-                width={78}
+                width={97}
                 height={24}
                 priority
               />

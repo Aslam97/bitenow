@@ -23,7 +23,7 @@ export default function HeaderLocation() {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <button className="mt-1 inline-flex h-8 items-center rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1.5 hover:bg-zinc-200 sm:h-9">
+        <button className="mt-2 inline-flex h-8 items-center rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1.5 hover:bg-zinc-200 sm:h-9">
           <PinSvg />
           <span className="ml-1.5 line-clamp-1 text-sm font-normal">Kosan</span>
         </button>
