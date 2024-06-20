@@ -18,10 +18,16 @@ export async function fetchApi<T>({
   const query = parseSearchParams(new URLSearchParams(params))
   const url = process.env.NEXT_PUBLIC_API_URL + '/' + path + '?' + query
 
-  const response = await fetch(url, config)
-  const data = await response.json()
+  try {
+    const response = await fetch(url, config)
+    if (!response.ok) {
+      throw new Error(response.statusText)
+    }
 
-  return data
+    return await response.json()
+  } catch (error) {
+    throw new Error(String(error))
+  }
 }
 
 export async function validateLocation(location: Record<string, any>) {
