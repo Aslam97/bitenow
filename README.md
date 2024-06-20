@@ -1,6 +1,6 @@
 ## Bitenow
 
-A simple web app contains search, geolocation, infinite scroll server action and soon fillter. The goal of this project is to clone the food delivery web app.
+A simple web app contains search, geolocation, infinite scroll server action.
 
 ![App screenshot](https://i.imgur.com/1nsmEY5.jpg)
 
@@ -10,8 +10,9 @@ Before you start, make sure you have **bitenow-api** running on your local. You 
 
 1. Clone the repository
 2. Install the dependencies by running `npm install`
-3. Copy the `.env.example` file to `.env.local` and update the `NEXT_PUBLIC_API_URL` with the URL of the bitenow-api
-4. Run the app by running `npm run dev`
+3. Copy the `.env.example` file to `.env.local` and update the `NEXT_PUBLIC_API_URL` with API URL
+4. Download MaxMind GeoLite2 City database from [here](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data) and put it in the db directory of the project (a small register is required to download the database)
+5. Run the app by running `npm run dev`
 
 ### Roadmap
 
