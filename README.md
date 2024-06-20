@@ -6,7 +6,7 @@ A simple web app contains search, geolocation, infinite scroll server action.
 
 ### Running locally
 
-Before you start, make sure you have **bitenow-api** running on your local. You can find the repository [bitenow-api](https://github.com/Aslam97/bitenow-api). Or you can access the JSON here [JSON Example](https://mocki.io/v1/e43b436c-dbf0-4b78-8103-ff9c1c3c8213)
+Before you start, make sure you have **bitenow-api** running on your local. You can find the repository [bitenow-api](https://github.com/Aslam97/bitenow-api). Or you can access the JSON here [Businesses](https://mocki.io/v1/e43b436c-dbf0-4b78-8103-ff9c1c3c8213) - [Cuisines](https://mocki.io/v1/625c8f6d-837b-4453-87a9-22ebf885fa58)
 
 1. Clone the repository
 2. Install the dependencies by running `npm install`
